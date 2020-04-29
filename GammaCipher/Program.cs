@@ -22,8 +22,9 @@ namespace GammaCipher {
 
             var result = Gammate(code, inputString);
 
-            Console.WriteLine("Result:");
+            Console.WriteLine("Encryption result:");
             Console.WriteLine(result);
+
             Console.ReadKey();
 
         }
@@ -155,12 +156,12 @@ namespace GammaCipher {
 
             int[] result = new int[maxLen];
 
-            for (int i = sub; i < maxLen; i++) {
-                result[i] = Math.Min(a[i - (aB ? 0 : sub)] + b[i - (aB ? sub : 0)], 1);
+            for (int i = 0; i < maxLen; i++) {
+                result[i] = aB ? a[i] : b[i];
             }
 
-            for (int i = 0; i < minLen; i++) {
-                result[i] = aB ? a[i] : b[i];
+            for (int i = sub; i < maxLen; i++) {
+                result[i] = ((a[i - (aB ? 0 : sub)] == 1) ^ (b[i - (aB ? sub : 0)] == 1)) ? 1 : 0;
             }
 
             return result;
